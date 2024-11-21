@@ -1,0 +1,51 @@
+name: cafe_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_native_splash: ^2.4.0
+  provider: ^6.0.4 # Gerenciamento de estado
+  http: ^0.13.5 # Requisições HTTP
+  shared_preferences: ^2.1.0 # Armazenamento local
+  sqflite: ^2.0.1 # Banco de dados local
+  google_sign_in: ^6.2.2
+  connectivity_plus: ^6.1.0
+  firebase_auth: ^5.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/coffeAI.png
+    - assets/images/coffeimg.jpg
+    - assets/images/coffe-routing.png
+    - assets/images/coffee_cup.png
+    - assets/images/google.png
+    - assets/images/user.png
+    - assets/images/filtro.png
+    - assets/images/coffehorizont.png
+    - assets/images/leftside.png
+    - assets/images/rightside.png
+    - assets/images/Group3151.png
+    - assets/images/Group3150.png
+    - assets/images/heart.png
+    - assets/images/bag2.png
+    - assets/images/fill1.png
+    - assets/images/bean.png
+    - assets/images/milk.png
+    - assets/images/heart2.png
+    - assets/images/Document.png
+    - assets/images/Frame32.png
+    - assets/images/Frame33.png
+    - assets/images/Discount.png
+    - assets/images/moneys.png
