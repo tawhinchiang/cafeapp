@@ -26,7 +26,7 @@ class SearchCoffeState extends State<SearchCoffe> {
             children: [
               Column(
                 children: [
-                  const GradientLinear(),
+                  const HeaderSecondPage(),
                   Container(
                     color: const Color(0xffF3F3F3),
                     width: MediaQuery.of(context).size.width,

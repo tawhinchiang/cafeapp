@@ -1,7 +1,38 @@
+import 'dart:developer';
+import 'package:cafe_app/components/locationInfo.dart';
+import 'package:cafe_app/components/search_filter.dart';
+import 'package:cafe_app/services/auth_google.dart';
 import 'package:flutter/material.dart';
 
-class GradientLinear extends StatelessWidget {
-  const GradientLinear({super.key});
+class HeaderSecondPage extends StatefulWidget {
+  const HeaderSecondPage({
+    super.key,
+  });
+
+  @override
+  State<HeaderSecondPage> createState() => _GradientLinearState();
+}
+
+class _GradientLinearState extends State<HeaderSecondPage> {
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    final user = await authService.signInWithGoogle();
+
+    if (user != null) {
+      setState(() {
+        authService.photoUrl = user.photoUrl;
+      });
+    }
+    log('Usuário logado: ${authService.username}');
+    log('URL da foto: ${authService.photoUrl}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,28 +61,21 @@ class GradientLinear extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(
-                  width: 161,
-                  height: 40,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Location',
-                        style: TextStyle(color: Colors.white, fontSize: 13),
-                      ),
-                      Text(
-                        'Araguaína, Tocantins',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ],
-                  ),
-                ),
+                const LocationInfo(),
                 SizedBox(
                   width: 44,
                   height: 44,
-                  child: Image.asset('assets/images/user.png'),
-                ),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: authService.photoUrl != null
+                        ? NetworkImage(authService.photoUrl!)
+                        : null,
+                    child: authService.photoUrl == null
+                        ? const Icon(Icons.person,
+                            size: 25, color: Colors.white)
+                        : null,
+                  ),
+                )
               ],
             ),
           ),
@@ -69,44 +93,7 @@ class GradientLinear extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Row(
-                children: [
-                  const Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search Coffee',
-                        hintStyle: TextStyle(color: Colors.white54),
-                        prefixIcon: Icon(Icons.search, color: Colors.white),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.all(16.0),
-                      ),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
-                    child: Container(
-                      width: 40,
-                      height: 45,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffC67C4E),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: IconButton(
-                        icon: const ImageIcon(
-                          AssetImage('assets/images/filtro.png'),
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          // Ação do botão de filtro
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: const SearchAndFilter(),
             ),
           ),
         ],

@@ -1,7 +1,6 @@
 import 'package:cafe_app/services/auth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:cafe_app/pages/secondpage.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 class MyhomePage extends StatefulWidget {
   const MyhomePage({super.key});
